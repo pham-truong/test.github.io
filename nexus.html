@@ -1,0 +1,44 @@
+<html>
+<head>
+<title> Test draw clip</title>
+</head>
+<body>
+	<label id = "ua">User agent :  </label> <br><br>
+	<table>
+		<tr>
+			<td>Reset transform matrix before fill or stroke</td>
+			<td>Reset transform matrix after fill or stroke</td>
+		</tr>
+		<tr>
+			<td><canvas id="canvas1" width="400" height="400" style="border:1px solid #d3d3d3;"></canvas></td>
+			<td><canvas id="canvas2" width="400" height="400" style="border:1px solid #d3d3d3;"></canvas></td>
+		</tr>
+	</table>
+</body>
+
+<script type="text/javascript">
+	//show user agent
+	var ua = navigator.userAgent;
+	document.getElementById("ua").innerHTML = "User Agent : " + ua;
+
+
+	// call setTransform before fill or stroke function, it will reverse transform set before.
+	var mainCanvas1 = document.getElementById("canvas1");
+	var ctx1 = mainCanvas1.getContext("2d");
+	ctx1.transform(1, 0, 0, 1, 150, 150);
+	ctx1.rect(0, 0, 200, 200);
+	ctx1.setTransform(1, 0, 0, 1, 0, 0);
+	ctx1.fillStyle = "red";
+	ctx1.fill();
+
+	// call setTransform after fill or stroke function, it will remain transform set before.
+	var mainCanvas2 = document.getElementById("canvas2");
+	var ctx2 = mainCanvas2.getContext("2d");
+	ctx2.transform(1, 0, 0, 1, 150, 150);
+	ctx2.rect(0, 0, 200, 200);
+	ctx2.fillStyle = "red";
+	ctx2.fill();
+	ctx2.setTransform(1, 0, 0, 1, 0, 0);
+
+</script>
+</html>
